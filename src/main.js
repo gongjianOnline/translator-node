@@ -4,22 +4,19 @@ const querystring = require('querystring');
 const server = http.createServer((request, response) => {
   let APilist = request.url;
   APilist = APilist.slice(0,APilist.indexOf("?"))
-  console.log("监听到访问了")
   if(APilist === "/baiduCurrency"){
-    console.log("进入了百度PI的判断条件")
     let {query} = url.parse(request.url,true);
     const querys = querystring.stringify({
       q: query.word,
       from: query.from,
       to: query.to,
-      appid: query.appId,
+      appid: query.appid,
       salt: query.salt,
       sign: query.sign,
     })
-    console.log("查询字符串")
-    console.log(querys)
     http.get(
       "http://api.fanyi.baidu.com/api/trans/vip/translate?"+querys,
+      // "http://api.fanyi.baidu.com/api/trans/vip/translate?q=apple&from=en&to=zh&appid=2015063000000001&salt=1435660288&sign=f89f9594663708c1605f3d736d01d2d4",
       function(data){
         let str ="";
         data.on("data",function(chunk){
@@ -35,7 +32,6 @@ const server = http.createServer((request, response) => {
   )
   }
 });
-
 server.listen(8888);
 
 
