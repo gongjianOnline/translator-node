@@ -1,8 +1,10 @@
 const http = require('http');
 const url = require('url');
 const querystring = require('querystring');
+const md5 = require('md5-node')
 const server = http.createServer((request, response) => {
   response.setHeader('Access-Control-Allow-Origin', '*');
+  console.log("有人访问了")
   let APilist = request.url;
   APilist = APilist.slice(0,APilist.indexOf("?"))
   if(APilist === "/baiduCurrency"){
@@ -11,9 +13,9 @@ const server = http.createServer((request, response) => {
       q: query.word,
       from: query.from,
       to: query.to,
-      appid: query.appid,
-      salt: query.salt,
-      sign: query.sign,
+      appid: "20200929000576935",
+      salt: 1435660288,
+      sign: md5(`20200929000576935${query.word}1435660288_byVNY9Ujvm4tS3Vxrws`),
     })
     console.log("打印参数")
     console.log(querys)
