@@ -2,6 +2,7 @@ const http = require('http');
 const url = require('url');
 const querystring = require('querystring');
 const server = http.createServer((request, response) => {
+  response.setHeader('Access-Control-Allow-Origin', '*');
   let APilist = request.url;
   APilist = APilist.slice(0,APilist.indexOf("?"))
   if(APilist === "/baiduCurrency"){
